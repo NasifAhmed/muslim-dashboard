@@ -107,7 +107,7 @@ const StateProvider = ({ children }: { children?: ReactNode }) => {
                     dispatch({ type: "set timings", payload: res });
                     dispatch({
                         type: "set timing",
-                        payload: res[dateToday.getDate()],
+                        payload: res[dateToday.getDate() - 1],
                     });
                     // const timingToday = timingFormatter(
                     //     res[dateToday.getDate() - 1].timings
