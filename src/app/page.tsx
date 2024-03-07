@@ -1,4 +1,5 @@
 "use client";
+import LiveTime from "@/components/live-time";
 import LocationSearch from "@/components/location-search";
 import Time from "@/components/time";
 import TimeRamadan from "@/components/time-ramadan";

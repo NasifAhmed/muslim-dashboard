@@ -30,7 +30,7 @@ export default function TimeRamadan() {
         <div>
             {timeData ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    <Card className="w-full aspect-square flex items-center justify-center md:p-14 p-5">
+                    <Card className="md:w-full aspect-square flex items-center justify-center md:p-14 p-5 w-[60vw]">
                         <div className="flex flex-col justify-between gap-5">
                             <h2 className="font-bold text-2xl md:text-3xl text-center">
                                 Sehri
