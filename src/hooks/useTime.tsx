@@ -30,10 +30,14 @@ export default function useTime() {
         console.log("endt time", end);
 
         // Calculate the difference in milliseconds
-        let differenceHours = Math.abs(end.getHours() - start.getHours());
-        let differenceMinutes = Math.abs(end.getMinutes() - start.getMinutes());
+        let difference = Math.abs(end.getTime() - start.getTime());
 
-        return `${differenceHours} hours ${differenceMinutes} minutes`;
+        const differenceMinutes: number = Math.floor(difference / (1000 * 60));
+
+        const hours = Math.floor(differenceMinutes / 60);
+        const minutes = differenceMinutes % 60;
+
+        return `${hours} hours ${minutes} minutes`;
     }
 
     function getCurrentPrayerTime(currentTime: Date) {
@@ -83,17 +87,14 @@ export default function useTime() {
         };
 
         for (const prayerTime in prayerTimes) {
-            console.log("current time", prayerTime, currentTime);
             const startMs = new Date(
                 prayerTimes[prayerTime as keyof prayerTimeDataType]
                     .start as string
             );
-            console.log("start time", prayerTime, startMs);
             const endMs = new Date(
                 prayerTimes[prayerTime as keyof prayerTimeDataType]
                     .end as string
             );
-            console.log("end time", prayerTime, endMs);
 
             if (currentTime >= startMs && currentTime <= endMs) {
                 console.log("found time", endMs);
