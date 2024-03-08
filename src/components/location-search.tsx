@@ -79,8 +79,10 @@ export default function LocationSearch() {
     return (
         <Form {...form}>
             <div className="flex flex-col justify-center items-center gap-5 w-[95vw] md:w-[40vw] transition-all">
-                <h1 className="font-bold text-2xl mt-10">Muslim Dashboard</h1>
-                <h2 className="mb-20 text-lg">
+                <h1 className="font-bold text-2xl mt-6 md:mt-10">
+                    Muslim Dashboard
+                </h1>
+                <h2 className="mb-6 md:mb-10 text-lg">
                     Dashboard for prayer and fasting times
                 </h2>
                 <form
