@@ -36,8 +36,13 @@ export default function useTime() {
 
         const hours = Math.floor(differenceMinutes / 60);
         const minutes = differenceMinutes % 60;
-
-        return `${hours} hours ${minutes} minutes`;
+        if (hours === 0) {
+            return `${minutes} minutes`;
+        } else if (minutes === 0) {
+            return `${hours} hours`;
+        } else {
+            return `${hours} hours ${minutes} minutes`;
+        }
     }
 
     function getCurrentPrayerTime(currentTime: Date) {
