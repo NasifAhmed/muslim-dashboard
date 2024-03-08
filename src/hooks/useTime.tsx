@@ -104,6 +104,8 @@ export default function useTime() {
             if (currentTime >= startMs && currentTime <= endMs) {
                 console.log("found time", endMs);
                 return prayerTime;
+            } else if (startMs > endMs) {
+                return "Isha";
             }
         }
 
