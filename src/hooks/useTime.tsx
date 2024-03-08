@@ -62,6 +62,14 @@ export default function useTime() {
                 start: timings?.Isha,
                 end: timings?.Imsak,
             },
+            BreakAfterFajr: {
+                start: timings?.Sunrise,
+                end: timings?.Dhuhr,
+            },
+            BreakBeforeFajr: {
+                start: timings?.Imsak,
+                end: timings?.Fajr,
+            },
         };
 
         type prayerTimeDataType = {
@@ -70,6 +78,8 @@ export default function useTime() {
             Asr: string;
             Maghrib: string;
             Isha: string;
+            BreakAfterFajr: string;
+            BreakBeforeFajr: string;
         };
 
         for (const prayerTime in prayerTimes) {
@@ -88,8 +98,6 @@ export default function useTime() {
             if (currentTime >= startMs && currentTime <= endMs) {
                 console.log("found time", endMs);
                 return prayerTime;
-            } else if (startMs > endMs) {
-                return "Isha";
             }
         }
 
