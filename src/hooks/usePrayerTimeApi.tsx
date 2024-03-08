@@ -12,7 +12,7 @@ export default function usePrayerTimeApi() {
         const year = dateToday.getFullYear();
         const month = dateToday.getMonth() + 1;
 
-        const url = `https://api.aladhan.com/v1/calendar/${year}/${month}?latitude=${latitude}&longitude=${longitude}&school=1&&latitudeAdjustmentMethod=3&adjustment=-2&iso8601=true`;
+        const url = `https://api.aladhan.com/v1/calendar/${year}/${month}?latitude=${latitude}&longitude=${longitude}&school=1&&latitudeAdjustmentMethod=3&iso8601=true`;
         // &tune=0,0,0,0,0,2,0,0,0
 
         const response = await axios.get<PrayerTimeApiResponseType>(url);
