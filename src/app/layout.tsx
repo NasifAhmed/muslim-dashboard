@@ -15,7 +15,7 @@ const fontSans = FontSans({
 
 export const metadata: Metadata = {
     title: "Muslim Dashboard",
-    description: "A Dashboard for Muslims with quick prayer and Fasting times",
+    description: "A Dashboard for Muslims with quick prayer and fasting times",
 };
 
 export default function RootLayout({
@@ -27,7 +27,7 @@ export default function RootLayout({
         <html lang="en">
             <body
                 className={cn(
-                    "min-h-screen bg-background font-sans antialiased",
+                    "min-h-screen flex flex-col bg-background font-sans antialiased",
                     fontSans.variable
                 )}
             >
@@ -39,7 +39,9 @@ export default function RootLayout({
                 >
                     <StateProvider>
                         <Header />
-                        {children}
+                        <main className="flex-grow flex flex-col items-center justify-center">
+                            {children}
+                        </main>
                         <Footer />
                     </StateProvider>
                 </ThemeProvider>
