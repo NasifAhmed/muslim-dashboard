@@ -79,6 +79,10 @@ export default function LocationSearch() {
     return (
         <Form {...form}>
             <div className="flex flex-col justify-center items-center gap-5 w-[95vw] md:w-[40vw] transition-all">
+                <h1 className="font-bold text-2xl mt-10">Muslim Dashboard</h1>
+                <h2 className="mb-20 text-lg">
+                    Dashboard for prayer and fasting times
+                </h2>
                 <form
                     onSubmit={form.handleSubmit(onSubmit)}
                     className="w-2/3 space-y-6"
@@ -96,7 +100,7 @@ export default function LocationSearch() {
                                     />
                                 </FormControl>
                                 <FormDescription>
-                                    Search and choose your location
+                                    Search and choose your location from below
                                 </FormDescription>
                                 <FormMessage />
                             </FormItem>
