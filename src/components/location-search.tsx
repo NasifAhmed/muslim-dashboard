@@ -25,6 +25,7 @@ import {
 } from "@/components/ui/card";
 import { StateContext } from "@/providers/stateProvider";
 import { useRouter } from "next/navigation";
+import { RefreshCw } from "lucide-react";
 
 const FormSchema = z.object({
     query: z.string().min(2, {
@@ -34,6 +35,7 @@ const FormSchema = z.object({
 
 export default function LocationSearch() {
     const [results, setResults] = useState<GeoCodeApiResponseType[]>();
+    const [loading, setLoading] = useState(false);
     const { getResults } = useGeocoderApi();
     const { state, dispatch } = useContext(StateContext);
     const router = useRouter();
@@ -46,6 +48,7 @@ export default function LocationSearch() {
     });
 
     function onSubmit(data: z.infer<typeof FormSchema>) {
+        setLoading(true);
         toast({
             title: "You submitted the following values:",
             description: (
@@ -59,6 +62,7 @@ export default function LocationSearch() {
         getResults(data.query).then((res) => {
             console.log(res);
             setResults(res);
+            setLoading(false);
         });
     }
 
@@ -74,7 +78,7 @@ export default function LocationSearch() {
 
     return (
         <Form {...form}>
-            <div className="flex flex-col justify-center items-center gap-5">
+            <div className="flex flex-col justify-center items-center gap-5 w-[95vw] md:w-[40vw] transition-all">
                 <form
                     onSubmit={form.handleSubmit(onSubmit)}
                     className="w-2/3 space-y-6"
@@ -86,6 +90,7 @@ export default function LocationSearch() {
                             <FormItem>
                                 <FormControl>
                                     <Input
+                                        className="h-14"
                                         placeholder="Search query"
                                         {...field}
                                     />
@@ -99,24 +104,26 @@ export default function LocationSearch() {
                     />
                     <Button type="submit">Search</Button>
                 </form>
-                {results ? (
-                    <ul className="flex flex-col gap-2 justify-center items-center w-80">
-                        {results.map((result, index) => {
-                            return (
-                                <li
-                                    key={index}
-                                    onClick={() => handleSelect(result)}
-                                    className="w-full"
-                                >
-                                    <Card className="p-5 hover:ring-1 hover:ring-primary cursor-pointer">
-                                        {result.display_name}
-                                    </Card>
-                                </li>
-                            );
-                        })}
-                    </ul>
+                {loading ? (
+                    <RefreshCw size={90} className="animate-spin" />
                 ) : (
-                    <div></div>
+                    results && (
+                        <ul className="flex flex-col gap-2 justify-center items-center w-80">
+                            {results.map((result, index) => {
+                                return (
+                                    <li
+                                        key={index}
+                                        onClick={() => handleSelect(result)}
+                                        className="w-full"
+                                    >
+                                        <Card className="p-5 hover:ring-1 hover:ring-primary cursor-pointer">
+                                            {result.display_name}
+                                        </Card>
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    )
                 )}
             </div>
         </Form>
