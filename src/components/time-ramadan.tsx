@@ -16,15 +16,13 @@ export default function TimeRamadan() {
     const [timeData, setTimeData] = useState<timeDataType>();
     useEffect(() => {
         const dateToday = new Date();
-        if (state.prayerTimingsAll) {
+        if (state.prayerTimingToday) {
             setTimeData({
-                Iftar: state.prayerTimingsAll[dateToday.getDate()].timings
-                    .Maghrib,
-                Sehri: state.prayerTimingsAll[dateToday.getDate()].timings
-                    .Imsak,
+                Iftar: state.prayerTimingToday.timings.Maghrib,
+                Sehri: state.prayerTimingToday.timings.Imsak,
             });
         }
-    }, [state.prayerTimingsAll]);
+    }, [state.prayerTimingToday]);
 
     return (
         <div>

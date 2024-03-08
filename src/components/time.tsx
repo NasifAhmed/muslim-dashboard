@@ -29,21 +29,19 @@ export default function Time() {
         useTime();
     useEffect(() => {
         const dateToday = new Date();
-        if (state.prayerTimingsAll) {
+        if (state.prayerTimingToday) {
             setTimeData({
-                Fajr: state.prayerTimingsAll[dateToday.getDate()].timings.Fajr,
-                Dhuhr: state.prayerTimingsAll[dateToday.getDate()].timings
-                    .Dhuhr,
-                Asr: state.prayerTimingsAll[dateToday.getDate()].timings.Asr,
-                Maghrib:
-                    state.prayerTimingsAll[dateToday.getDate()].timings.Maghrib,
-                Isha: state.prayerTimingsAll[dateToday.getDate()].timings.Isha,
+                Fajr: state.prayerTimingToday.timings.Fajr,
+                Dhuhr: state.prayerTimingToday.timings.Dhuhr,
+                Asr: state.prayerTimingToday.timings.Asr,
+                Maghrib: state.prayerTimingToday.timings.Maghrib,
+                Isha: state.prayerTimingToday.timings.Isha,
             });
             // if (timeData) {
             //     setCurrentWaqt(() => getCurrentWaqt(timeData, new Date()));
             // }
         }
-    }, [state.prayerTimingsAll]);
+    }, [state.prayerTimingToday]);
 
     useEffect(() => {
         if (timeData) {
@@ -61,24 +59,18 @@ export default function Time() {
     }, [timeData]);
 
     function waqtEndTime(waqt: string) {
-        const dateToday = new Date();
-        if (state.prayerTimingsAll) {
+        if (state.prayerTimingToday) {
             switch (waqt) {
                 case "Fajr":
-                    return state.prayerTimingsAll[dateToday.getDate()].timings
-                        .Sunrise;
+                    return state.prayerTimingToday.timings.Sunrise;
                 case "Dhuhr":
-                    return state.prayerTimingsAll[dateToday.getDate()].timings
-                        .Asr;
+                    return state.prayerTimingToday.timings.Asr;
                 case "Asr":
-                    return state.prayerTimingsAll[dateToday.getDate()].timings
-                        .Sunset;
+                    return state.prayerTimingToday.timings.Sunset;
                 case "Maghrib":
-                    return state.prayerTimingsAll[dateToday.getDate()].timings
-                        .Isha;
+                    return state.prayerTimingToday.timings.Isha;
                 case "Isha":
-                    return state.prayerTimingsAll[dateToday.getDate()].timings
-                        .Imsak;
+                    return state.prayerTimingToday.timings.Imsak;
                 default:
                     return "";
             }
@@ -162,14 +154,16 @@ export default function Time() {
                                     <h2 className="font-bold text-xl md:text-2xl text-center">
                                         {currentWaqt}
                                     </h2>
-                                    <h3 className="text-center text-xs text-muted-foreground font-semibold">
+                                    <h3 className="text-center text-xs font-semibold">
                                         {currentWaqt &&
                                             timingFormatter(
                                                 timeData[
                                                     currentWaqt as keyof timeDataType
                                                 ]
                                             )}{" "}
-                                        to{" "}
+                                        <span className="text-muted-foreground">
+                                            to{" "}
+                                        </span>
                                         {currentWaqt &&
                                             timingFormatter(
                                                 waqtEndTime(
