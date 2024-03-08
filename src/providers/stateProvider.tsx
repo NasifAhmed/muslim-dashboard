@@ -41,7 +41,6 @@ export const StateContext = createContext<contexType>({
 
 const StateProvider = ({ children }: { children?: ReactNode }) => {
     const { getRawTimings } = usePrayerTimeApi();
-    const router = useRouter();
 
     function reducer(
         state: typeof initialState,
@@ -79,21 +78,6 @@ const StateProvider = ({ children }: { children?: ReactNode }) => {
         }
     }
     const [state, dispatch] = useReducer(reducer, initialState);
-
-    useEffect(() => {
-        if (window.localStorage.getItem("location")) {
-            const valueFromStorage = window.localStorage.getItem(
-                "location"
-            ) as string;
-            dispatch({
-                type: "set location",
-                payload: JSON.parse(valueFromStorage),
-            });
-            console.log("Loaded from storage");
-        } else {
-            router.push("/setup");
-        }
-    }, []);
 
     useEffect(() => {
         if (state.location) {
