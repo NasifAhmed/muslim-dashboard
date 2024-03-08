@@ -17,8 +17,6 @@ export default function Home() {
             {/* {state.location && <LocationSearch />} */}
 
             <Time />
-            <Separator />
-            <TimeRamadan />
         </main>
     );
 }
