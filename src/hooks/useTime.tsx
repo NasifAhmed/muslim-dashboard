@@ -25,9 +25,9 @@ export default function useTime() {
         const start = new Date();
         const end = new Date(endTime);
 
-        console.log("---------------------------------------------");
-        console.log("start time", start);
-        console.log("endt time", end);
+        // console.log("---------------------------------------------");
+        // console.log("start time", start);
+        // console.log("endt time", end);
 
         // Calculate the difference in milliseconds
         let difference = Math.abs(end.getTime() - start.getTime());
@@ -96,15 +96,30 @@ export default function useTime() {
                 prayerTimes[prayerTime as keyof prayerTimeDataType]
                     .start as string
             );
+            // console.log("start time", startMs);
             const endMs = new Date(
                 prayerTimes[prayerTime as keyof prayerTimeDataType]
                     .end as string
             );
+            // console.log("end time", endMs);
+
+            const midnight = new Date(startMs);
+            midnight.setHours(0, 0, 0, 0);
 
             if (currentTime >= startMs && currentTime <= endMs) {
-                console.log("found time", endMs);
+                // console.log("found time", endMs);
                 return prayerTime;
-            } else if (startMs > endMs) {
+                // Special case for Isha because it starts on today and ends on next day.
+            } else if (
+                (currentTime >=
+                    new Date(state.prayerTimingToday?.timings.Isha as string) &&
+                    currentTime <= midnight) ||
+                (currentTime >= midnight &&
+                    currentTime <=
+                        new Date(
+                            state.prayerTimingToday?.timings.Fajr as string
+                        ))
+            ) {
                 return "Isha";
             }
         }
