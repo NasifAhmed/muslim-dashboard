@@ -111,14 +111,10 @@ export default function useTime() {
                 return prayerTime;
                 // Special case for Isha because it starts on today and ends on next day.
             } else if (
-                (currentTime >=
-                    new Date(state.prayerTimingToday?.timings.Isha as string) &&
-                    currentTime <= midnight) ||
-                (currentTime >= midnight &&
-                    currentTime <=
-                        new Date(
-                            state.prayerTimingToday?.timings.Fajr as string
-                        ))
+                currentTime >=
+                    new Date(state.prayerTimingToday?.timings.Isha as string) ||
+                currentTime <=
+                    new Date(state.prayerTimingToday?.timings.Fajr as string)
             ) {
                 return "Isha";
             }
