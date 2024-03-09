@@ -4,7 +4,7 @@ export default function useGeocoderApi() {
     async function getResults(query: string) {
         const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(
             query
-        )}&format=jsonv2&limit=3`;
+        )}&format=jsonv2&limit=5`;
 
         const response = await axios.get(url);
 
