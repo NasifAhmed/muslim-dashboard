@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import { cn, zeroPrefixer } from "@/lib/utils";
 import { useEffect, useState } from "react";
 
 export default function LiveTime({ className }: { className?: string }) {
@@ -14,11 +14,11 @@ export default function LiveTime({ className }: { className?: string }) {
         <div className={cn(className)}>
             {time && (
                 <div>
-                    {`${time.getHours() % 12 || 12} : ${time.getMinutes()} : ${
-                        time.getSeconds() < 10
-                            ? `0${time.getSeconds()}`
-                            : time.getSeconds()
-                    }
+                    {`${zeroPrefixer(
+                        time.getHours() % 12 || 12
+                    )} : ${zeroPrefixer(time.getMinutes())} : ${zeroPrefixer(
+                        time.getSeconds()
+                    )}
                     ${time.getHours() >= 12 ? "PM" : "AM"}`}
                 </div>
             )}

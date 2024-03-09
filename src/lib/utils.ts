@@ -12,3 +12,10 @@ export function timingFormatter(timing: string) {
     const readableFormat = dateTime.toLocaleString(DateTime.TIME_SIMPLE);
     return readableFormat;
 }
+
+export function zeroPrefixer(num: number) {
+    if (num <= 9 && num >= 0) {
+        return "0" + num.toString();
+    }
+    return num.toString();
+}
