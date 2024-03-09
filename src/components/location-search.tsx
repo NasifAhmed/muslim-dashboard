@@ -78,7 +78,7 @@ export default function LocationSearch() {
 
     return (
         <Form {...form}>
-            <div className="flex flex-col justify-center items-center gap-5 w-[95vw] md:w-[40vw] transition-all">
+            <div className="flex flex-col justify-center items-center gap-5 w-[100vw] md:w-[40vw] transition-all">
                 <h1 className="font-bold text-2xl mt-6 md:mt-10">
                     Muslim Dashboard
                 </h1>
@@ -94,16 +94,16 @@ export default function LocationSearch() {
                         name="query"
                         render={({ field }) => (
                             <FormItem>
+                                <FormDescription>
+                                    Search and select your location from below
+                                </FormDescription>
                                 <FormControl>
                                     <Input
                                         className="h-14"
-                                        placeholder="Search query"
+                                        placeholder="Example : Mecca, Saudi Arabia"
                                         {...field}
                                     />
                                 </FormControl>
-                                <FormDescription>
-                                    Search and choose your location from below
-                                </FormDescription>
                                 <FormMessage />
                             </FormItem>
                         )}
