@@ -79,6 +79,10 @@ export default function useTime() {
                 start: timings?.Imsak,
                 end: timings?.Fajr,
             },
+            BreakAfterSunset: {
+                start: timings?.Imsak,
+                end: timings?.Fajr,
+            },
         };
 
         type prayerTimeDataType = {
@@ -112,9 +116,9 @@ export default function useTime() {
                 // Special case for Isha because it starts on today and ends on next day.
             } else if (
                 currentTime >=
-                    new Date(state.prayerTimingToday?.timings.Isha as string) ||
+                new Date(state.prayerTimingToday?.timings.Isha as string) ||
                 currentTime <=
-                    new Date(state.prayerTimingToday?.timings.Fajr as string)
+                new Date(state.prayerTimingToday?.timings.Fajr as string)
             ) {
                 return "Isha";
             }

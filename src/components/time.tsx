@@ -113,68 +113,127 @@ export default function Time() {
                             <Separator orientation="vertical" />
                             {getCurrentPrayerTime(new Date()) ===
                                 "BreakBeforeFajr" && (
-                                <div className="flex flex-col justify-between gap-5">
-                                    <h2 className="font-bold text-xl md:text-2xl text-center text-muted-foreground">
-                                        Next Prayer
-                                    </h2>
-                                    <div>
+                                    <div className="flex flex-col justify-between gap-5">
+                                        <h2 className="font-bold text-xl md:text-2xl text-center text-muted-foreground">
+                                            Next Prayer
+                                        </h2>
                                         <h2 className="font-bold text-lg md:text-2xl text-center mb-2">
                                             Fajr
                                         </h2>
-                                        <h3 className="text-center text-sm md:text-base font-semibold">
+                                        <h3 className="text-center text-xs font-semibold">
                                             {timingFormatter(
                                                 state.prayerTimingToday?.timings
                                                     .Fajr as string
-                                            )}
-                                        </h3>
-                                        <h4 className="text-center text-muted-foreground text-xs md:text-base font-semibold">
-                                            to
-                                        </h4>
-                                        <h3 className="text-center text-sm md:text-base font-semibold">
+                                            )}{" "}
+                                            <span className="text-muted-foreground">
+                                                to{" "}
+                                            </span>
                                             {timingFormatter(
                                                 waqtEndTime(
                                                     "Fajr"
                                                 )?.trim() as string
                                             )}
                                         </h3>
+                                        <div>
+                                            <h3 className="text-center text-base font-semibold">
+                                                Time Remaining Until Fajr
+                                            </h3>
+                                            {
+                                                <TimeRemaining
+                                                    className="text-center text-base text-muted-foreground"
+                                                    targetTime={
+                                                        state.prayerTimingToday?.timings.Fajr as string
+                                                    }
+                                                />
+                                            }
+                                        </div>
                                     </div>
-                                </div>
-                            )}
+                                )}
 
                             {getCurrentPrayerTime(new Date()) ===
                                 "BreakAfterFajr" && (
-                                <div className="flex flex-col justify-between gap-5">
-                                    <h2 className="font-bold text-xl md:text-2xl text-center text-muted-foreground">
-                                        Next Prayer
-                                    </h2>
-                                    <div>
+                                    <div className="flex flex-col justify-between gap-5">
+                                        <h2 className="font-bold text-xl md:text-2xl text-center text-muted-foreground">
+                                            Next Prayer
+                                        </h2>
                                         <h2 className="font-bold text-lg md:text-2xl text-center mb-2">
                                             Dhuhr
                                         </h2>
-                                        <h3 className="text-center text-sm md:text-base font-semibold">
+                                        <h3 className="text-center text-xs font-semibold">
                                             {timingFormatter(
                                                 state.prayerTimingToday?.timings
                                                     .Dhuhr as string
-                                            )}
-                                        </h3>
-                                        <h4 className="text-center text-muted-foreground text-xs md:text-base font-semibold">
-                                            to
-                                        </h4>
-                                        <h3 className="text-center text-sm md:text-base font-semibold">
+                                            )}{" "}
+                                            <span className="text-muted-foreground">
+                                                to{" "}
+                                            </span>
                                             {timingFormatter(
                                                 waqtEndTime(
                                                     "Dhuhr"
                                                 )?.trim() as string
                                             )}
                                         </h3>
+                                        <div>
+                                            <h3 className="text-center text-base font-semibold">
+                                                Time Remaining Until Dhuhr
+                                            </h3>
+                                            {
+                                                <TimeRemaining
+                                                    className="text-center text-base text-muted-foreground"
+                                                    targetTime={
+                                                        state.prayerTimingToday?.timings.Dhuhr as string
+                                                    }
+                                                />
+                                            }
+                                        </div>
                                     </div>
-                                </div>
-                            )}
+                                )}
+
+                            {getCurrentPrayerTime(new Date()) ===
+                                "BreakAfterSunset" && (
+                                    <div className="flex flex-col justify-between gap-5">
+                                        <h2 className="font-bold text-xl md:text-2xl text-center text-muted-foreground">
+                                            Next Prayer
+                                        </h2>
+                                        <h2 className="font-bold text-lg md:text-2xl text-center mb-2">
+                                            Maghrib
+                                        </h2>
+                                        <h3 className="text-center text-xs font-semibold">
+                                            {timingFormatter(
+                                                state.prayerTimingToday?.timings
+                                                    .Maghrib as string
+                                            )}{" "}
+                                            <span className="text-muted-foreground">
+                                                to{" "}
+                                            </span>
+                                            {timingFormatter(
+                                                waqtEndTime(
+                                                    "Maghrib"
+                                                )?.trim() as string
+                                            )}
+                                        </h3>
+                                        <div>
+                                            <h3 className="text-center text-base font-semibold">
+                                                Time Remaining Until Maghrib
+                                            </h3>
+                                            {
+                                                <TimeRemaining
+                                                    className="text-center text-base text-muted-foreground"
+                                                    targetTime={
+                                                        state.prayerTimingToday?.timings.Maghrib as string
+                                                    }
+                                                />
+                                            }
+                                        </div>
+                                    </div>
+                                )}
 
                             {getCurrentPrayerTime(new Date()) !==
                                 "BreakAfterFajr" &&
                                 getCurrentPrayerTime(new Date()) !==
-                                    "BreakBeforeFajr" && (
+                                "BreakBeforeFajr" &&
+                                getCurrentPrayerTime(new Date()) !==
+                                "BreakAfterSunset" && (
                                     <>
                                         <div className="flex flex-col justify-between gap-5">
                                             <h2 className="font-bold text-xl md:text-2xl text-center">
@@ -184,7 +243,7 @@ export default function Time() {
                                                 {currentWaqt &&
                                                     timingFormatter(
                                                         timeData[
-                                                            currentWaqt as keyof timeDataType
+                                                        currentWaqt as keyof timeDataType
                                                         ]
                                                     )}{" "}
                                                 <span className="text-muted-foreground">
@@ -226,14 +285,14 @@ export default function Time() {
                             }
                             if (
                                 getCurrentPrayerTime(new Date()) ===
-                                    "BreakBeforeFajr" &&
+                                "BreakBeforeFajr" &&
                                 key === "Fajr"
                             ) {
                                 return null;
                             }
                             if (
                                 getCurrentPrayerTime(new Date()) ===
-                                    "BreakAfterFajr" &&
+                                "BreakAfterFajr" &&
                                 key === "Dhuhr"
                             ) {
                                 return null;
@@ -250,7 +309,7 @@ export default function Time() {
                                         <h3 className="text-center text-sm md:text-lg font-semibold">
                                             {timingFormatter(
                                                 timeData[
-                                                    key as keyof timeDataType
+                                                key as keyof timeDataType
                                                 ]
                                             )}
                                         </h3>
