@@ -113,28 +113,40 @@ const StateProvider = ({ children }: { children?: ReactNode }) => {
 
     useEffect(() => {
         if (state.location) {
-            if (window.localStorage.getItem("timings")) {
-                const valueFromStorage = window.localStorage.getItem(
-                    "timings"
-                ) as string;
-                dispatch({
-                    type: "set timings",
-                    payload: JSON.parse(valueFromStorage).data,
-                });
-                console.log("Loaded timings from storage");
+            // Keep timings save in local storage
+            // if (window.localStorage.getItem("timings")) {
+            //     const valueFromStorage = window.localStorage.getItem(
+            //         "timings"
+            //     ) as string;
+            //     dispatch({
+            //         type: "set timings",
+            //         payload: JSON.parse(valueFromStorage).data,
+            //     });
+            //     console.log("Loaded timings from storage");
 
-                console.log(JSON.parse(valueFromStorage).data);
-            } else {
-                getRawTimings(
-                    parseFloat(state.location.lat),
-                    parseFloat(state.location.lon)
-                ).then((res) => {
-                    console.table(res);
-                    if (res) {
-                        dispatch({ type: "set timings", payload: res });
-                    }
-                });
-            }
+            //     console.log(JSON.parse(valueFromStorage).data);
+            // } else {
+            //     getRawTimings(
+            //         parseFloat(state.location.lat),
+            //         parseFloat(state.location.lon)
+            //     ).then((res) => {
+            //         console.table(res);
+            //         if (res) {
+            //             dispatch({ type: "set timings", payload: res });
+            //         }
+            //     });
+            // }
+
+            // Don't keep timings saved in localstorage. Get data from api everytime
+            getRawTimings(
+                parseFloat(state.location.lat),
+                parseFloat(state.location.lon)
+            ).then((res) => {
+                console.table(res);
+                if (res) {
+                    dispatch({ type: "set timings", payload: res });
+                }
+            });
         }
     }, [state.location]);
 
