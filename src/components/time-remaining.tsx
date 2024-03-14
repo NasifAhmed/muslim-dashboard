@@ -5,22 +5,21 @@ import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 
 export default function TimeRemaining({
-    className,
-    targetTime,
+  className,
+  targetTime,
 }: {
-    className?: string;
-    targetTime: string;
+  className?: string;
+  targetTime: string;
 }) {
-    const { getCurrentPrayerTime, getTimeDifference, timeRemaining } =
-        useTime();
-    const [time, setTime] = useState<string>(getTimeDifference(targetTime));
+  const { getCurrentPrayerTime, getTimeDifference, timeRemaining } = useTime();
+  const [time, setTime] = useState<string>(getTimeDifference(targetTime));
 
-    useEffect(() => {
-        const remainingTimer = setInterval(() => {
-            setTime(getTimeDifference(targetTime));
-        }, 60000);
+  useEffect(() => {
+    const remainingTimer = setInterval(() => {
+      setTime(getTimeDifference(targetTime));
+    }, 60000);
 
-        return () => clearInterval(remainingTimer);
-    }, []);
-    return <div className={cn(className)}>{time && <div>{time}</div>}</div>;
+    return () => clearInterval(remainingTimer);
+  }, []);
+  return <div className={cn(className)}>{time && <div>{time}</div>}</div>;
 }
